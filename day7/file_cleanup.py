@@ -9,6 +9,7 @@ class Directory:
     def __init__(self, name, parent):
         self.files = {}
         self.size = None
+        self.name = name
         self.parent = parent
     
     def __setitem__(self, key, value):
@@ -41,6 +42,7 @@ def calc_size(current):
             if size <= 100000: directory_count += size
         else:
             Exception(f'type: {type(item)} is not valid. Must be File or Directory')
+    current.size = count
     return count
 
 
@@ -82,11 +84,36 @@ def part1():
     # then calc dirs size recursively
     calc_size(root)
     print(directory_count)    
+    return root
+
+
+def find_space(current):
+    global space_to_delete
+    global min_directory_size
+    if current.size >= space_to_delete and current.size < min_directory_size:
+        min_directory_size = current.size
+    for item_name in current.files:
+        item = current[item_name]
+        if isinstance(item, Directory):
+            find_space(item)
 
 
 
-def part2():
-    pass
+def part2(root):
+    total_space = 70000000
+    required_space = 30000000
+    global space_to_delete
+    space_to_delete = required_space - (total_space-root.size)
+    global min_directory_size
+    min_directory_size = root.size
+    find_space(root)
+    print(min_directory_size)
+
+
+
+
+
 
 if __name__ == "__main__":
-    part1()
+    root = part1()
+    part2(root)
