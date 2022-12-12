@@ -1,0 +1,60 @@
+{
+    "monkeys":[
+        {
+            "starting_items": [73, 77],
+            "op": ["*", 5],
+            "test": 11,
+            "if_true": 6,
+            "if_false": 5
+        },
+        {
+            "starting_items": [57, 88, 80],
+            "op": ["+", 5],
+            "test": 19,
+            "if_true": 6,
+            "if_false": 0
+        },
+        {
+            "starting_items": [61, 81, 84, 69, 77, 88],
+            "op": ["*", 19],
+            "test": 5,
+            "if_true": 3,
+            "if_false": 1
+        },
+        {
+            "starting_items": [78, 89, 71, 60, 81, 84, 87, 75],
+            "op": ["+", 7],
+            "test": 3,
+            "if_true": 1,
+            "if_false": 0
+        },
+        {
+            "starting_items": [60, 76, 90, 63, 86, 87, 89],
+            "op": ["+", 2],
+            "test": 13,
+            "if_true": 2,
+            "if_false": 7
+        },
+        {
+            "starting_items": [88],
+            "op": ["+", 1],
+            "test": 17,
+            "if_true": 4,
+            "if_false": 7
+        },
+        {
+            "starting_items": [84, 98, 78, 85],
+            "op": ["*", "old"],
+            "test": 7,
+            "if_true": 5,
+            "if_false": 4
+        },
+        {
+            "starting_items": [98, 89, 78, 73, 71],
+            "op": ["+", 4],
+            "test": 2,
+            "if_true": 3,
+            "if_false": 2
+        }
+    ]
+}
