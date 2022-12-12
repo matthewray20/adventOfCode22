@@ -5,7 +5,6 @@ FILENAME = 'cpu_instructions.txt'
 
 
 
-
 def part1():
     timestamps_to_measure = [20, 60, 100, 140, 180, 220]
     registor = 1
@@ -32,8 +31,43 @@ def part1():
 
 
 
+class CPU:
+    def __init__(self):
+        self.timestamp = 0
+        self.registor = 1
+        self.output_str = ''
+    
+    def cycle(self):
+        self.print_pixel()
+        self.timestamp += 1
+    
+    def noop(self):
+        self.cycle()
+
+    def addx(self, x):
+        self.cycle()
+        self.cycle()
+        self.registor += x
+
+    def print_pixel(self):
+        sprite_pos = [self.registor - 1, self.registor, self.registor + 1]
+        pixel_x = self.timestamp % 40
+        if pixel_x == 0:
+            self.output_str += '\n'
+        if pixel_x in sprite_pos:
+            self.output_str += '#'
+        else:
+            self.output_str += '.'
+    
+    def end(self):
+        print(self.output_str)
+
+
+
+
 
 def part2():
+    processor = CPU()
     with open(FILENAME, 'r') as f:
         output_str = ''
         timestamp = -1
@@ -42,25 +76,13 @@ def part2():
             line = line.strip()
             instruction = line[:4]
             if instruction == 'noop':
-                to_add = 0
+                processor.noop()
             elif instruction == 'addx':
-                to_add = int(line[5:]) 
-                timestamp += 1
-                pixel_x = timestamp % 40
-                if pixel_x == 0:
-                    output_str += '\n'
-                output_str += '#' if pixel_x in [x for x in range(registor-1, registor+2)] else '.'
-            timestamp += 1
-            pixel_x = timestamp % 40
-            if pixel_x == 0:
-                print('new line:', timestamp)
-                output_str += '\n'
-            output_str += '#' if pixel_x in [x for x in range(registor-1, registor+2)] else '.'
-            registor += to_add
-    print(output_str)
-    lens = output_str.split()
-    for d in lens:
-        print(len(d))
+                to_add = int(line[5:])
+                processor.addx(to_add)
+        processor.end()
+        # EGJEGCFK
+
 
 
 
